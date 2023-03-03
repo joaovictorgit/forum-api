@@ -39,7 +39,11 @@ const swaggerOptions: any = {
   apis: ["./src/**/*-router.ts"],
 };
 const swaggerDocs = swaggerJSDoc(swaggerOptions);
-app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+app.use(
+  "/docs",
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerDocs, { explorer: true })
+);
 app.use(express.json());
 app.use(cors());
 app.use("/", routes);

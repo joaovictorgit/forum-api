@@ -1,31 +1,29 @@
 version: "3.0"
 services:
-  database:
-    image: postgres
-    container_name: database_forum_api
-    restart: always
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=12345
-      - POSTGRES_DB=forumApi
-    volumes:
-      - pgdata:/data/postgres
+  db-postgres-event:
+    image: postgres:alpine
     ports:
-      - 5432:5432
-
-  app:
+      - "5435:5432"
+    container_name: "db-postgres-event"
+    restart: always
+    volumes:
+      - ./database-forum-api:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 12345
+  app-forum-api:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: forum_api_app
+    container_name: app-forum-api
     ports:
-      - 3000:3000
+      - "3000:3000"
     volumes:
-      - .:/usr/app
+      - ./app-forum-api/app
     links:
-      - database
+      - db-postgres-event
     depends_on:
-      - database
+      - db-postgres-event
+
 volumes:
-  pgdata:
-    driver: local
+  db-postgres-event:

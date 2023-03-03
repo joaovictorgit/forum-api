@@ -1,10 +1,9 @@
-import { PrismaClient } from "@prisma/client";
 import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import jwt, { Secret } from "jsonwebtoken";
 import { IUser } from "../entities/user";
 import { checkIfUserExist } from "../middleware/user-exist";
-const prisma = new PrismaClient();
+import { prisma } from "../service/prisma";
 const secret_key: Secret = "login-user";
 
 class UserController {

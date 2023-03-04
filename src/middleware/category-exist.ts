@@ -1,9 +1,9 @@
 import { prisma } from "../service/prisma";
 
-export async function checkIfCategoryExist(name: string): Promise<Boolean> {
+export async function checkIfCategoryExist(id: number): Promise<Boolean> {
   const category = await prisma.category.findUnique({
     where: {
-      name_category: name,
+      id_category: id,
     },
   });
   if (!category) {

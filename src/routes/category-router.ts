@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from "express";
 import CategoryController from "../controllers/category-controller";
+import express from "express";
 
-const categoryExpress = require("express");
-const categoryRoute = categoryExpress.Router();
+const categoryRoute = express.Router();
 const categoryController = new CategoryController();
 
 categoryRoute.post(

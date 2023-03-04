@@ -1,10 +1,12 @@
 import userRouter from "./user-router";
 import categoryRoute from "./category-router";
+import commentRoute from "./comment-router";
+import express from "express";
 
-const routerExpress = require("express");
-const routers = routerExpress.Router();
+const routers = express.Router();
 
 routers.use("/users", userRouter);
 routers.use("/categories", categoryRoute);
+routers.use("/comments", commentRoute);
 
 export default routers;

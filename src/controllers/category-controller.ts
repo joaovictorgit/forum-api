@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import { prisma } from "../service/prisma";
 import { ICategory } from "../entities/category";
-import { checkIfCategoryExist } from "../middleware/category-exist";
 
 class CategoryController {
   async createCategory(

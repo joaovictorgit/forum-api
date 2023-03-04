@@ -1,9 +1,10 @@
 import { NextFunction, Request, Response } from "express";
 import UserController from "../controllers/user-controller";
 import authentication from "../middleware/authentication";
+import express from "express";
+
 const userController = new UserController();
-const userExpress = require("express");
-const userRoute = userExpress.Router();
+const userRoute = express.Router();
 
 /**
  * @swagger

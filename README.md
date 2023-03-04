@@ -26,6 +26,18 @@
 
 - Comentário
 
+  1 - Cadastrar novo comentário
+
+  2 - Exibir comentários cadastrados
+
+  3 - Exibir comentários pela categoria
+
+  4 - Exibir comentários pelo usuário
+
+  5 - Atualizar comentário pelo id
+
+  6 - Deletar comentário pelo id
+
 ## Configuração para desenvolvimento
 
 Para baixar e instalar o projeto, siga os passos:

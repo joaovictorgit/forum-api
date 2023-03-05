@@ -1,0 +1,329 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Forum API",
+    "description": "Essa API é composta por endpoints que recebem e respondem a solicitações de clientes usando um protocolo de comunicação comum, geralmente HTTP. Esses endpoints fornecem acesso aos recursos do fórum, como usuários, categorias, comentários e outras informações relevantes.",
+    "contact": {
+      "name": "Support",
+      "email": "victoralmeida.0216@gmail.com"
+    },
+    "version": "1.0.0"
+  },
+  "tags": [
+    {
+      "name": "Usuários",
+      "description": "Tudo sobre nossos usuários"
+    },
+    {
+      "name": "Categorias",
+      "description": "Tudo sobre as categorias"
+    },
+    {
+      "name": "Comentários",
+      "description": "Tudo sobre os comentários realizados no site"
+    }
+  ],
+  "paths": {
+    "/api/users": {
+      "post": {
+        "tags": ["Usuários"],
+        "description": "Criação de um usuário",
+        "requestBody": {
+          "description": "Dados necessários para cadastro de um usuário",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestUser"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Cadastro realizado com sucesso!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ResponseUser"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Dados incompletos!"
+          }
+        }
+      },
+      "get": {
+        "description": "Usuários cadastrados",
+        "tags": ["Usuários"],
+        "responses": {
+          "200": {
+            "description": "Usuários retornados com sucesso!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseUser"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro!"
+          }
+        }
+      }
+    },
+    "/api/users/login": {
+      "post": {
+        "description": "Login de um usuário",
+        "tags": ["Usuários"],
+        "requestBody": {
+          "description": "Dados necessários para o login de um usuário",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RequestLogin"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Login realizado com sucesso!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ResponseLogin"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Dados incompletos!"
+          }
+        }
+      }
+    },
+    "/api/users/{id}": {
+      "get": {
+        "description": "Busca de um usuário por id",
+        "tags": ["Usuários"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do usuário",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Usuário retornado com sucesso!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseUser"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Usuário não existe!"
+          }
+        }
+      },
+      "patch": {
+        "description": "Atualização do usuário pelo id",
+        "tags": ["Usuários"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do usuário",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "name_user",
+            "in": "path",
+            "description": "Nome do usuário",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "email",
+            "in": "path",
+            "description": "Email do usuário",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "password",
+            "in": "path",
+            "description": "Senha do usuário",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Dados atulizados com sucesso!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "items": {
+                    "$ref": "#/components/schemas/ResponseUser"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Dados incompletos!"
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletar usuário pelo id",
+        "tags": ["Usuários"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do usuário",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Usuário deletado com sucesso!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseUser"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Usuário não existe!"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "RequestLogin": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "Email do usuário a ser criado",
+            "example": "joao@gmail.com"
+          },
+          "password": {
+            "type": "string",
+            "description": "Senha do usuário a ser criado",
+            "example": "12345"
+          }
+        }
+      },
+      "ResponseLogin": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "Email do usuário a ser criado",
+            "example": "joao@gmail.com"
+          },
+          "password": {
+            "type": "string",
+            "description": "Senha do usuário a ser criado",
+            "example": "12345"
+          },
+          "token": {
+            "type": "string",
+            "description": "Token de autenticação"
+          }
+        }
+      },
+      "RequestUser": {
+        "type": "object",
+        "properties": {
+          "name_user": {
+            "type": "string",
+            "description": "Nome do usuário a ser criado",
+            "example": "João"
+          },
+          "email": {
+            "type": "string",
+            "description": "Email do usuário a ser criado",
+            "example": "joao@gmail.com"
+          },
+          "password": {
+            "type": "string",
+            "description": "Senha do usuário a ser criado",
+            "example": "12345"
+          }
+        }
+      },
+      "ResponseUser": {
+        "type": "object",
+        "properties": {
+          "name_user": {
+            "type": "string",
+            "description": "Nome do usuário a ser criado",
+            "example": "João"
+          },
+          "email": {
+            "type": "string",
+            "description": "Email do usuário a ser criado",
+            "example": "joao@gmail.com"
+          },
+          "password": {
+            "type": "string",
+            "description": "Senha do usuário a ser criado",
+            "example": "12345"
+          },
+          "id": {
+            "type": "string",
+            "description": "Id do usuário",
+            "format": "uuid"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "description": "Autenticação utilizando jwt",
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}

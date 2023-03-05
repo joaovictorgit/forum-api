@@ -69,7 +69,7 @@ class CommentController {
       });
       return response.status(200).json({
         message: "Categories returned successfully!",
-        result: comments,
+        results: comments,
       });
     } catch (error: unknown) {
       return response.status(400).json({
@@ -97,7 +97,7 @@ class CommentController {
       });
       return response.status(200).json({
         message: "Users returned successfully!",
-        result: comments,
+        results: comments,
       });
     } catch (error: unknown) {
       return response.status(400).json({

@@ -47,3 +47,7 @@ Para baixar e instalar o projeto, siga os passos:
 3.  `npm install` ou `yarn install`
 4.  `npm start` ou `yarn start`
 5.  `npm test` ou `yarn test`
+
+## Rodando Aplicação
+
+![conversation-gif](./images/forumApi.gif)

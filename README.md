@@ -1,5 +1,5 @@
 # ForumApi
-
+API, desenvolvida com Node.js e Typescript, que realiza requisições http para realizar operações de um fórum online, onde é possível registrar novos usuários, categorias, e comentários.
 ## Aplicação
 
 - Usuário
